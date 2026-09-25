@@ -11,7 +11,7 @@ This block is written and re-added by `next dev` — verify at `node_modules/nex
 # Тренажёр для собеседований
 
 Стек: Next.js (App Router), TypeScript strict,
-Vercel AI SDK, Tailwind, shadcn/ui, Vitest, Playwright.
+Vercel AI SDK, Tailwind, shadcn/ui, Vitest, Playwright, Postgres.
 
 ## Как со мной работать
 - Я учусь. Перед кодом для новой задачи покажи план и дождись моего «ок».

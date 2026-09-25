@@ -1,5 +1,16 @@
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
+## Локальная база данных
+
+PostgreSQL 17 запускается в Docker через `compose.yaml` (нужен Docker Desktop).
+
+```bash
+cp .env.example .env  # один раз: доступы к БД и DATABASE_URL
+pnpm db:up            # запустить и дождаться готовности
+pnpm db:down          # остановить (данные сохраняются)
+pnpm db:reset         # удалить все данные и поднять чистую БД
+```
+
 ## Getting Started
 
 First, run the development server:

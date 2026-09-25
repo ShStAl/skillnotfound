@@ -1,0 +1,26 @@
+services:
+  postgres:
+    # Мажорная версия — как в проде (Supabase)
+    image: postgres:17
+    environment:
+      # Значения берутся из .env, шаблон — .env.example
+      POSTGRES_USER: ${POSTGRES_USER:?скопируй .env.example в .env}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?скопируй .env.example в .env}
+      POSTGRES_DB: ${POSTGRES_DB:?скопируй .env.example в .env}
+    ports:
+      # Только localhost: из локальной сети база недоступна
+      - "127.0.0.1:5432:5432"
+    volumes:
+      # В образах 18+ путь другой: /var/lib/postgresql
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      # $$ — переменные подставит shell внутри контейнера, а не Compose.
+      # -h localhost — проверка по TCP: при первой инициализации временный
+      # сервер слушает только unix-сокет и не должен считаться готовым.
+      test: ["CMD-SHELL", "pg_isready -h localhost -U $${POSTGRES_USER} -d $${POSTGRES_DB}"]
+      interval: 2s
+      timeout: 3s
+      retries: 15
+
+volumes:
+  pgdata:
